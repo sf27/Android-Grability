@@ -10,9 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public class ApiClient {
-    private static final String API_URL = "https://itunes.apple.com";
+import static com.grability.elio.grabilitytest.domain.Config.API_URL;
 
+public class ApiClient {
     public static Call<Objs> getObjects() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(API_URL)
