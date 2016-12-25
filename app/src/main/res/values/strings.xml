@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Rappi</string>
+    <string name="title_apps">Aplicaciones</string>
+    <string name="title_categories">Categorías</string>
 </resources>
