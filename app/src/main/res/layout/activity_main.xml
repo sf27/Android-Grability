@@ -24,6 +24,12 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/frag_content"
+            android:layout_width="match_parent"
+            android:paddingTop="?attr/actionBarSize"
+            android:layout_height="match_parent" />
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
