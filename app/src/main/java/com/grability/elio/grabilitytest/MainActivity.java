@@ -27,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MainView {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     private MainPresenter mainPresenter;
     @BindView(R.id.drawer)
@@ -68,12 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        System.out.println("Epale");
-        return false;
-    }
-
-    @Override
     public void downloadError(String error) {
         System.out.println(error);
     }
@@ -85,20 +79,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setUpNavigation() {
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.drawer_action_apps:
-                                break;
-                            case R.id.drawer_action_categories:
-                                break;
-                            default:
-                                break;
-                        }
-                        drawerLayout.closeDrawers();
-                        return true;
+                menuItem -> {
+                    switch (menuItem.getItemId()) {
+                        case R.id.drawer_action_apps:
+                            break;
+                        case R.id.drawer_action_categories:
+                            break;
+                        default:
+                            break;
                     }
+                    drawerLayout.closeDrawers();
+                    return true;
                 });
     }
 
