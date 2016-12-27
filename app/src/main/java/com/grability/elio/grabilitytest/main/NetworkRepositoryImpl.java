@@ -36,7 +36,7 @@ public class NetworkRepositoryImpl implements MainRepository {
                 ArrayList<ApiClient.Entry> entries = (ArrayList<ApiClient.Entry>)
                         response.body().feed.entry;
                 saveData(entries);
-                event.setType(MainEvent.onLoadAppsSuccess);
+                event.setType(MainEvent.onLoadAppsNetworkSuccess);
                 event.setError(null);
                 event.setApps(getApps());
                 event.setCategories(getCategories());
@@ -76,12 +76,12 @@ public class NetworkRepositoryImpl implements MainRepository {
         }
     }
 
-    private RealmResults<Category> getCategories(){
+    private RealmResults<Category> getCategories() {
         RealmQuery<Category> categories = realm.where(Category.class);
         return categories.findAll();
     }
 
-    private RealmResults<App> getApps(){
+    private RealmResults<App> getApps() {
         RealmQuery<App> apps = realm.where(App.class);
         return apps.findAll();
     }

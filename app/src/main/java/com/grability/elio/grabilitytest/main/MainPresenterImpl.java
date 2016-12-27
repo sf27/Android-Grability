@@ -2,6 +2,7 @@ package com.grability.elio.grabilitytest.main;
 
 import android.content.Context;
 
+import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
 import com.grability.elio.grabilitytest.entities.Category;
 import com.grability.elio.grabilitytest.lib.base.EventBus;
@@ -46,31 +47,44 @@ public class MainPresenterImpl implements MainPresenter {
     @Subscribe
     public void onEventMainThread(MainEvent event) {
         switch (event.getType()) {
-            case MainEvent.onLoadAppsSuccess:
+            case MainEvent.onLoadAppsLocalSuccess:
                 onLoadAppsSuccess(event.getApps());
                 onLoadCategoriesSuccess(event.getCategories());
+                onLostNetworkConnectionError(
+                        context.getString(R.string.message_lost_network_connection)
+                );
                 break;
             case MainEvent.onLoadAppsError:
                 onDownloadError(event.getError());
+                break;
+            case MainEvent.onLoadAppsNetworkSuccess:
+                onLoadAppsSuccess(event.getApps());
+                onLoadCategoriesSuccess(event.getCategories());
                 break;
         }
     }
 
     private void onDownloadError(String error) {
         if (mainView != null) {
-            mainView.downloadError(error);
+            mainView.onDownloadError(error);
+        }
+    }
+
+    private void onLostNetworkConnectionError(String error) {
+        if (mainView != null) {
+            mainView.onLostNetworkConnectionError(error);
         }
     }
 
     private void onLoadAppsSuccess(RealmResults<App> apps) {
         if (mainView != null) {
-            mainView.loadApps(apps);
+            mainView.onLoadApps(apps);
         }
     }
 
     private void onLoadCategoriesSuccess(RealmResults<Category> categories) {
         if (mainView != null) {
-            mainView.loadCategories(categories);
+            mainView.onLoadCategories(categories);
         }
     }
 

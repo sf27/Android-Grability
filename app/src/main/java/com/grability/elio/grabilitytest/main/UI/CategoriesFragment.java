@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
@@ -54,16 +55,21 @@ public class CategoriesFragment extends Fragment implements MainView {
     }
 
     @Override
-    public void downloadError(String error) {
+    public void onDownloadError(String error) {
         System.out.println("ErrorCategories: " + error);
     }
 
     @Override
-    public void loadApps(RealmResults<App> apps) {
+    public void onLostNetworkConnectionError(String error) {
+        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
     }
 
     @Override
-    public void loadCategories(RealmResults<Category> categories) {
+    public void onLoadApps(RealmResults<App> apps) {
+    }
+
+    @Override
+    public void onLoadCategories(RealmResults<Category> categories) {
         System.out.println("CategoriesResult: " + categories);
         textCategories.setText(categories.toString());
     }

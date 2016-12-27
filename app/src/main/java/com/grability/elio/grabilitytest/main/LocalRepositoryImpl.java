@@ -26,7 +26,7 @@ public class LocalRepositoryImpl implements MainRepository {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<App> apps = realm.where(App.class);
         RealmQuery<Category> categories = realm.where(Category.class);
-        event.setType(MainEvent.onLoadAppsSuccess);
+        event.setType(MainEvent.onLoadAppsLocalSuccess);
         event.setError(null);
         event.setApps(apps.findAll());
         event.setCategories(categories.findAll());

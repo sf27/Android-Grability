@@ -2,4 +2,7 @@
     <string name="app_name">Rappi</string>
     <string name="title_apps">Aplicaciones</string>
     <string name="title_categories">Categorías</string>
+    <string name="message_lost_network_connection">
+        Error: Se ha perdido la conexión. Intente conectarse nuevamente.
+    </string>
 </resources>

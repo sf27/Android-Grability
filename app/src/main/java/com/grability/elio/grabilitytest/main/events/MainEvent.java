@@ -1,16 +1,14 @@
 package com.grability.elio.grabilitytest.main.events;
 
-import com.grability.elio.grabilitytest.api.ApiClient;
 import com.grability.elio.grabilitytest.entities.App;
 import com.grability.elio.grabilitytest.entities.Category;
-
-import java.util.List;
 
 import io.realm.RealmResults;
 
 public class MainEvent {
-    public final static int onLoadAppsSuccess = 1;
-    public final static int onLoadAppsError = 2;
+    public final static int onLoadAppsLocalSuccess = 1;
+    public final static int onLoadAppsNetworkSuccess = 2;
+    public final static int onLoadAppsError = 3;
 
     private int type;
     private String error;
