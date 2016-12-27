@@ -50,4 +50,6 @@ dependencies {
     compile "com.daimajia.androidanimations:library:$rootProject.ext.androidanimationsVersion"
     compile "io.reactivex:rxandroid:$rootProject.ext.rxAndroidVersion"
     compile "io.reactivex:rxjava:$rootProject.ext.rxJavaVersion"
+    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    compile "io.realm:android-adapters:$rootProject.ext.realAdapters"
 }

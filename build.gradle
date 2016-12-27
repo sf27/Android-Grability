@@ -46,5 +46,6 @@ ext {
     androidanimationsVersion = '1.1.3@aar'
     rxAndroidVersion = '1.2.1'
     rxJavaVersion = '1.1.6'
-
+    glideVersion = '3.7.0'
+    realAdapters = '1.4.0'
 }

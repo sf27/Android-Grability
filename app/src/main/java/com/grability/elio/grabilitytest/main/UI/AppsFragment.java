@@ -2,10 +2,11 @@ package com.grability.elio.grabilitytest.main.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.grability.elio.grabilitytest.R;
@@ -20,6 +21,7 @@ import com.grability.elio.grabilitytest.main.MainPresenter;
 import com.grability.elio.grabilitytest.main.MainPresenterImpl;
 import com.grability.elio.grabilitytest.main.MainRepository;
 import com.grability.elio.grabilitytest.main.NetworkRepositoryImpl;
+import com.grability.elio.grabilitytest.main.adapters.AppsRecyclerAdapter;
 import com.grability.elio.grabilitytest.main.events.MainEvent;
 
 import butterknife.BindView;
@@ -30,14 +32,18 @@ import io.realm.RealmResults;
 public class AppsFragment extends Fragment implements MainView {
 
     private MainPresenter mainPresenter;
-    @BindView(R.id.textApps)
-    TextView textApps;
+    @BindView(R.id.appRecyclerView)
+    RecyclerView appRecyclerView;
+    AppsRecyclerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_apps, container, false);
         ButterKnife.bind(this, view);
+
+        appRecyclerView.setAdapter(adapter);
+        appRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         EventBus eventBus = new GreenRobotEventBus();
         MainRepository networkRepository = new NetworkRepositoryImpl(eventBus, new MainEvent());
@@ -67,7 +73,8 @@ public class AppsFragment extends Fragment implements MainView {
     @Override
     public void onLoadApps(RealmResults<App> apps) {
         System.out.println("AppsResult: " + apps);
-        textApps.setText(apps.toString());
+        adapter = new AppsRecyclerAdapter(getActivity(), apps, true);
+        appRecyclerView.setAdapter(adapter);
     }
 
     @Override
