@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.grability.elio.grabilitytest.CategoriesFragment">
+    tools:context="com.grability.elio.grabilitytest.main.UI.CategoriesFragment">
 
     <TextView
+        android:id="@+id/textCategories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Categories" />

@@ -12,26 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.grability.elio.grabilitytest.api.ApiClient;
-import com.grability.elio.grabilitytest.lib.GreenRobotEventBus;
-import com.grability.elio.grabilitytest.lib.base.EventBus;
-import com.grability.elio.grabilitytest.main.MainInteractor;
-import com.grability.elio.grabilitytest.main.MainInteractorImpl;
-import com.grability.elio.grabilitytest.main.MainPresenter;
-import com.grability.elio.grabilitytest.main.MainPresenterImpl;
-import com.grability.elio.grabilitytest.main.MainRepository;
-import com.grability.elio.grabilitytest.main.MainRepositoryImpl;
-import com.grability.elio.grabilitytest.main.UI.MainView;
-import com.grability.elio.grabilitytest.main.events.MainEvent;
-
-import java.util.List;
+import com.grability.elio.grabilitytest.main.UI.AppsFragment;
+import com.grability.elio.grabilitytest.main.UI.CategoriesFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends AppCompatActivity {
 
-    private MainPresenter mainPresenter;
     @BindView(R.id.drawer)
     DrawerLayout drawerLayout;
     @BindView(R.id.toolbar)
@@ -58,32 +47,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        EventBus eventBus = new GreenRobotEventBus();
-        MainRepository mainRepository = new MainRepositoryImpl(eventBus, new MainEvent());
-        MainInteractor mainInteractor = new MainInteractorImpl(mainRepository);
-        mainPresenter = new MainPresenterImpl(this, eventBus, this, mainInteractor);
-        mainPresenter.onCreate();
-        mainPresenter.loadApps();
-    }
-
-    @Override
-    protected void onDestroy() {
-        mainPresenter.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
-    public void downloadError(String error) {
-        System.out.println(error);
-    }
-
-    @Override
-    public void showData(List<ApiClient.Entry> entries) {
-        System.out.println(entries.toString());
+        Realm.init(MainActivity.this);
     }
 
     public void setUpNavigation() {
-
         navigationView.setNavigationItemSelectedListener(
                 menuItem -> {
                     Fragment fragment;

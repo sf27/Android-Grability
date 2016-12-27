@@ -1,8 +1,12 @@
 package com.grability.elio.grabilitytest.main.events;
 
 import com.grability.elio.grabilitytest.api.ApiClient;
+import com.grability.elio.grabilitytest.entities.App;
+import com.grability.elio.grabilitytest.entities.Category;
 
 import java.util.List;
+
+import io.realm.RealmResults;
 
 public class MainEvent {
     public final static int onLoadAppsSuccess = 1;
@@ -10,7 +14,8 @@ public class MainEvent {
 
     private int type;
     private String error;
-    private List<ApiClient.Entry> data;
+    private RealmResults<App> apps;
+    private RealmResults<Category> categories;
 
     public MainEvent() {
         this.error = null;
@@ -25,12 +30,20 @@ public class MainEvent {
         this.error = error;
     }
 
-    public List<ApiClient.Entry> getData() {
-        return data;
+    public RealmResults<App> getApps() {
+        return apps;
     }
 
-    public void setData(List<ApiClient.Entry> entries) {
-        this.data = entries;
+    public void setApps(RealmResults<App> apps) {
+        this.apps = apps;
+    }
+
+    public RealmResults<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(RealmResults<Category> categories) {
+        this.categories = categories;
     }
 
     public int getType() {

@@ -2,14 +2,15 @@ package com.grability.elio.grabilitytest.main;
 
 import android.content.Context;
 
-import com.grability.elio.grabilitytest.api.ApiClient;
+import com.grability.elio.grabilitytest.entities.App;
+import com.grability.elio.grabilitytest.entities.Category;
 import com.grability.elio.grabilitytest.lib.base.EventBus;
 import com.grability.elio.grabilitytest.main.UI.MainView;
 import com.grability.elio.grabilitytest.main.events.MainEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.List;
+import io.realm.RealmResults;
 
 public class MainPresenterImpl implements MainPresenter {
 
@@ -46,7 +47,8 @@ public class MainPresenterImpl implements MainPresenter {
     public void onEventMainThread(MainEvent event) {
         switch (event.getType()) {
             case MainEvent.onLoadAppsSuccess:
-                onLoadAppsSuccess(event.getData());
+                onLoadAppsSuccess(event.getApps());
+                onLoadCategoriesSuccess(event.getCategories());
                 break;
             case MainEvent.onLoadAppsError:
                 onDownloadError(event.getError());
@@ -60,9 +62,15 @@ public class MainPresenterImpl implements MainPresenter {
         }
     }
 
-    private void onLoadAppsSuccess(List<ApiClient.Entry> data) {
+    private void onLoadAppsSuccess(RealmResults<App> apps) {
         if (mainView != null) {
-            mainView.showData(data);
+            mainView.loadApps(apps);
+        }
+    }
+
+    private void onLoadCategoriesSuccess(RealmResults<Category> categories) {
+        if (mainView != null) {
+            mainView.loadCategories(categories);
         }
     }
 
