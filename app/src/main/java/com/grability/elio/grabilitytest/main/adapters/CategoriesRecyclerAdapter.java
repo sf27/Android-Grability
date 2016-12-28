@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.Category;
 
@@ -43,6 +45,9 @@ public class CategoriesRecyclerAdapter extends
         public AppsViewHolder(View itemView) {
             super(itemView);
             txtName = (TextView) itemView.findViewById(R.id.txtName);
+            YoYo.with(Techniques.Wave)
+                    .duration(700)
+                    .playOn(itemView.findViewById(R.id.txtName));
         }
     }
 }

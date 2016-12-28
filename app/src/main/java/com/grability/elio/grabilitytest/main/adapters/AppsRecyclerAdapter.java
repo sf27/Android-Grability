@@ -38,10 +38,8 @@ public class AppsRecyclerAdapter extends
     @Override
     public void onBindViewHolder(AppsViewHolder holder, int position) {
         App obj = this.getData().get(position);
-        String title = obj.getTitle();
-        int index = title.indexOf("-");
-        String newTitle = title.substring(0, index);
-        holder.txtTitle.setText(newTitle);
+
+        holder.txtTitle.setText(formatTitle(obj.getTitle()));
         if (!obj.getImages().isEmpty()) {
             Glide.with(context)
                     .load(obj.getImages().get(2).getUrl())
@@ -49,7 +47,11 @@ public class AppsRecyclerAdapter extends
                     .fitCenter()
                     .into(holder.imgView);
         }
+    }
 
+    private String formatTitle(String title) {
+        int index = title.indexOf("-");
+        return title.substring(0, index);
     }
 
     public class AppsViewHolder extends RecyclerView.ViewHolder {
