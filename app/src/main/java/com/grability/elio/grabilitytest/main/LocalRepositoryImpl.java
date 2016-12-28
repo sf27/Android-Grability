@@ -64,32 +64,6 @@ public class LocalRepositoryImpl implements LocalRepository {
         });
     }
 
-
-    private void saveData(ArrayList<ApiClient.Entry> entries) {
-        for (ApiClient.Entry entry : entries) {
-            realm.executeTransaction(realm -> {
-                Category category = new Category();
-                category.setName(entry.category.attributes.label);
-
-                App app = new App();
-                app.setId(entry.id.attributes.id);
-                app.setCategory(category);
-                app.setDescription(entry.summary.label);
-                app.setTitle(entry.title.label);
-
-                RealmList<AppImage> appImages = new RealmList<>();
-                for (ApiClient.Image image : entry.images) {
-                    AppImage appImage = new AppImage();
-                    appImage.setUrl(image.label);
-                    appImages.add(appImage);
-                }
-                app.setImages(appImages);
-
-                realm.copyToRealmOrUpdate(app);
-            });
-        }
-    }
-
     public RealmResults<Category> getCategories() {
         RealmQuery<Category> categories = realm.where(Category.class);
         return categories.findAll();
