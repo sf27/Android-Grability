@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
 
@@ -36,11 +38,13 @@ public class AppsRecyclerAdapter extends
     @Override
     public void onBindViewHolder(AppsViewHolder holder, int position) {
         App obj = this.getData().get(position);
-        holder.txtTitle.setText(obj.getTitle());
-        //holder.txtDescription.setText(obj.getDescription());
+        String title = obj.getTitle();
+        int index = title.indexOf("-");
+        String newTitle = title.substring(0, index);
+        holder.txtTitle.setText(newTitle);
         if (!obj.getImages().isEmpty()) {
             Glide.with(context)
-                    .load(obj.getImages().get(0).getUrl())
+                    .load(obj.getImages().get(2).getUrl())
                     .override(100, 100)
                     .fitCenter()
                     .into(holder.imgView);
@@ -50,15 +54,18 @@ public class AppsRecyclerAdapter extends
 
     public class AppsViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle;
-        TextView txtDescription;
         ImageView imgView;
 
         public AppsViewHolder(View itemView) {
             super(itemView);
             txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
-            //txtDescription = (TextView) itemView.findViewById(R.id.txtDescription);
             imgView = (ImageView) itemView.findViewById(R.id.imgView);
-            // cardView = (CardView) itemView.findViewById(R.id.card_view);
+            YoYo.with(Techniques.RotateIn)
+                    .duration(700)
+                    .playOn(itemView.findViewById(R.id.imgView));
+            YoYo.with(Techniques.Wave)
+                    .duration(700)
+                    .playOn(itemView.findViewById(R.id.imgSt));
         }
     }
 }

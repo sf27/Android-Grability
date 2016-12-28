@@ -9,15 +9,21 @@
     <ImageView
         android:id="@+id/imgView"
         android:layout_width="match_parent"
-        android:layout_height="@android:dimen/thumbnail_height"
+        android:layout_height="wrap_content"
         android:src="@drawable/logo" />
-
 
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:maxLength="20"
+        android:textStyle="bold"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/imgSt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-
+        android:src="@drawable/estante" />
 </LinearLayout>
