@@ -20,19 +20,18 @@ import io.realm.RealmResults;
 
 public class LocalRepositoryImpl implements LocalRepository {
     private EventBus eventBus;
-    private MainEvent event;
     private Realm realm;
 
-    public LocalRepositoryImpl(EventBus eventBus, MainEvent event) {
+    public LocalRepositoryImpl(EventBus eventBus, Realm realm) {
         this.eventBus = eventBus;
-        this.event = event;
-        this.realm = Realm.getDefaultInstance();
+        this.realm = realm;
     }
 
     @Override
     public void loadApps() {
         RealmQuery<App> apps = realm.where(App.class);
         RealmQuery<Category> categories = realm.where(Category.class);
+        MainEvent event = new MainEvent();
         event.setType(MainEvent.onLoadAppsLocalSuccess);
         event.setError(null);
         event.setApps(apps.findAll());

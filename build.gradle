@@ -48,4 +48,6 @@ ext {
     rxJavaVersion = '1.1.6'
     glideVersion = '3.7.0'
     realAdapters = '1.4.0'
+    jsr250Version = '1.0'
+    daggerVersion = '2.0.1'
 }

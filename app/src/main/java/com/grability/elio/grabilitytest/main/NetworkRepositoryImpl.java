@@ -15,17 +15,16 @@ import retrofit2.Response;
 
 public class NetworkRepositoryImpl implements MainRepository {
     private EventBus eventBus;
-    private MainEvent event;
     private LocalRepository localRepository;
 
-    public NetworkRepositoryImpl(EventBus eventBus, MainEvent event, LocalRepository localRepository) {
+    public NetworkRepositoryImpl(EventBus eventBus, LocalRepository localRepository) {
         this.eventBus = eventBus;
-        this.event = event;
         this.localRepository = localRepository;
     }
 
     @Override
     public void loadApps() {
+        MainEvent event = new MainEvent();
         Call<ApiClient.Objs> call = ApiClient.getObjects();
         call.enqueue(new Callback<ApiClient.Objs>() {
             @Override
@@ -33,6 +32,7 @@ public class NetworkRepositoryImpl implements MainRepository {
                 ArrayList<ApiClient.Entry> entries = (ArrayList<ApiClient.Entry>)
                         response.body().feed.entry;
                 saveData(entries);
+
                 event.setType(MainEvent.onLoadAppsNetworkSuccess);
                 event.setError(null);
                 event.setApps(getApps());

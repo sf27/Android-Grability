@@ -9,21 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.grability.elio.grabilitytest.GrabilityApp;
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
 import com.grability.elio.grabilitytest.entities.Category;
-import com.grability.elio.grabilitytest.lib.GreenRobotEventBus;
-import com.grability.elio.grabilitytest.lib.base.EventBus;
-import com.grability.elio.grabilitytest.main.LocalRepository;
-import com.grability.elio.grabilitytest.main.LocalRepositoryImpl;
-import com.grability.elio.grabilitytest.main.MainInteractor;
-import com.grability.elio.grabilitytest.main.MainInteractorImpl;
 import com.grability.elio.grabilitytest.main.MainPresenter;
-import com.grability.elio.grabilitytest.main.MainPresenterImpl;
-import com.grability.elio.grabilitytest.main.MainRepository;
-import com.grability.elio.grabilitytest.main.NetworkRepositoryImpl;
 import com.grability.elio.grabilitytest.main.adapters.AppsRecyclerAdapter;
-import com.grability.elio.grabilitytest.main.events.MainEvent;
+import com.grability.elio.grabilitytest.main.di.AppsComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,9 +24,11 @@ import io.realm.RealmResults;
 
 public class AppsFragment extends Fragment implements MainView {
 
-    private MainPresenter mainPresenter;
     @BindView(R.id.appRecyclerView)
     RecyclerView appRecyclerView;
+
+    AppsComponent component;
+    MainPresenter presenter;
     AppsRecyclerAdapter adapter;
 
     @Override
@@ -43,22 +37,19 @@ public class AppsFragment extends Fragment implements MainView {
         View view = inflater.inflate(R.layout.fragment_apps, container, false);
         ButterKnife.bind(this, view);
 
+        setupInjection();
+
         appRecyclerView.setAdapter(adapter);
         appRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        EventBus eventBus = new GreenRobotEventBus();
-        LocalRepository localRepository = new LocalRepositoryImpl(eventBus, new MainEvent());
-        MainRepository networkRepository = new NetworkRepositoryImpl(eventBus, new MainEvent(), localRepository);
-        MainInteractor mainInteractor = new MainInteractorImpl(
-                getActivity(), localRepository, networkRepository
-        );
-        mainPresenter = new MainPresenterImpl(
-                getActivity(), eventBus, this, mainInteractor
-        );
-        mainPresenter.onCreate();
-        mainPresenter.loadApps();
-
         return view;
+    }
+
+    public void setupInjection() {
+        GrabilityApp app = new GrabilityApp();
+        component = app.getAppsComponent(getActivity(), this, this);
+        presenter = component.getMainPresenter();
+        adapter = component.getAppsAdapter();
     }
 
     @Override
@@ -84,7 +75,7 @@ public class AppsFragment extends Fragment implements MainView {
 
     @Override
     public void onDestroy() {
-        mainPresenter.onDestroy();
+        presenter.onDestroy();
         super.onDestroy();
     }
 }
