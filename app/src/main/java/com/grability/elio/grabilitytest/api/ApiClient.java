@@ -74,6 +74,7 @@ public class ApiClient {
         public Summary summary;
         @SerializedName("im:image")
         public List<Image> images;
+        public Id id;
 
         public Entry(Title title, Category category, Summary summary, List<Image> images) {
             this.title = title;
@@ -97,5 +98,18 @@ public class ApiClient {
         public Objs(Feed feed) {
             this.feed = feed;
         }
+    }
+
+    public static class Id {
+        public Attributes attributes;
+
+        public Attributes getAttributes() {
+            return attributes;
+        }
+    }
+
+    public static class Attributes {
+        @SerializedName("im:id")
+        public String id;
     }
 }

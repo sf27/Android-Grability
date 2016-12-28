@@ -14,6 +14,7 @@ import com.grability.elio.grabilitytest.entities.App;
 import com.grability.elio.grabilitytest.entities.Category;
 import com.grability.elio.grabilitytest.lib.GreenRobotEventBus;
 import com.grability.elio.grabilitytest.lib.base.EventBus;
+import com.grability.elio.grabilitytest.main.LocalRepository;
 import com.grability.elio.grabilitytest.main.LocalRepositoryImpl;
 import com.grability.elio.grabilitytest.main.MainInteractor;
 import com.grability.elio.grabilitytest.main.MainInteractorImpl;
@@ -46,8 +47,8 @@ public class CategoriesFragment extends Fragment implements MainView {
         categoriesRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
         EventBus eventBus = new GreenRobotEventBus();
-        MainRepository networkRepository = new NetworkRepositoryImpl(eventBus, new MainEvent());
-        MainRepository localRepository = new LocalRepositoryImpl(eventBus, new MainEvent());
+        LocalRepository localRepository = new LocalRepositoryImpl(eventBus, new MainEvent());
+        MainRepository networkRepository = new NetworkRepositoryImpl(eventBus, new MainEvent(), localRepository);
         MainInteractor mainInteractor = new MainInteractorImpl(
                 getActivity(), localRepository, networkRepository
         );

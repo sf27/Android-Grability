@@ -6,12 +6,12 @@ import com.grability.elio.grabilitytest.domain.NetworkUtils;
 
 public class MainInteractorImpl implements MainInteractor {
 
-    private MainRepository localRepository;
+    private LocalRepository localRepository;
     private MainRepository networkRepository;
     private Context context;
 
     public MainInteractorImpl(
-            Context context, MainRepository localRepository, MainRepository networkRepository) {
+            Context context, LocalRepository localRepository, MainRepository networkRepository) {
         this.localRepository = localRepository;
         this.networkRepository = networkRepository;
         this.context = context;

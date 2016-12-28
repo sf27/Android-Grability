@@ -1,6 +1,7 @@
 package com.grability.elio.grabilitytest.entities;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by elio on 12/26/16.
