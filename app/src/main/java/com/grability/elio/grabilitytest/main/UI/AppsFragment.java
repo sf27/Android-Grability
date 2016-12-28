@@ -64,7 +64,6 @@ public class AppsFragment extends Fragment implements MainView {
 
     @Override
     public void onLoadApps(RealmResults<App> apps) {
-        System.out.println("AppsResult: " + apps);
         adapter = new AppsRecyclerAdapter(getActivity(), apps, true);
         appRecyclerView.setAdapter(adapter);
     }

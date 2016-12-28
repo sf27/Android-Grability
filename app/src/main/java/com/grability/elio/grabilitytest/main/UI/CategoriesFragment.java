@@ -68,7 +68,6 @@ public class CategoriesFragment extends Fragment implements MainView {
 
     @Override
     public void onLoadCategories(RealmResults<Category> categories) {
-        System.out.println("CategoriesResult: " + categories);
         adapter = new CategoriesRecyclerAdapter(getActivity(), categories, true);
         categoriesRecyclerView.setAdapter(adapter);
     }
