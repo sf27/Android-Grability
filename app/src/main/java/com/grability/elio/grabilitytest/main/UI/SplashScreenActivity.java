@@ -1,4 +1,4 @@
-package com.grability.elio.grabilitytest;
+package com.grability.elio.grabilitytest.main.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.view.Window;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.grability.elio.grabilitytest.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

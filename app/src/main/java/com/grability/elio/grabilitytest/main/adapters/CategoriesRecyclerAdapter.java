@@ -45,7 +45,7 @@ public class CategoriesRecyclerAdapter extends
         public AppsViewHolder(View itemView) {
             super(itemView);
             txtName = (TextView) itemView.findViewById(R.id.txtName);
-            YoYo.with(Techniques.Wave)
+            YoYo.with(Techniques.SlideInLeft)
                     .duration(700)
                     .playOn(itemView.findViewById(R.id.txtName));
         }

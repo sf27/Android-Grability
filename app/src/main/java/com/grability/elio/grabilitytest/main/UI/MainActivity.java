@@ -1,4 +1,4 @@
-package com.grability.elio.grabilitytest;
+package com.grability.elio.grabilitytest.main.UI;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,8 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.grability.elio.grabilitytest.main.UI.AppsFragment;
-import com.grability.elio.grabilitytest.main.UI.CategoriesFragment;
+import com.grability.elio.grabilitytest.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,10 +57,12 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.drawer_action_apps:
                             fragment = new AppsFragment();
                             setFragmentContent(fragment);
+                            setTitle(getString(R.string.title_apps));
                             break;
                         case R.id.drawer_action_categories:
                             fragment = new CategoriesFragment();
                             setFragmentContent(fragment);
+                            setTitle(getString(R.string.title_categories));
                             break;
                         default:
                             break;

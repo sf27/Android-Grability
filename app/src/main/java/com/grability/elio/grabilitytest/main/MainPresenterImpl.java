@@ -20,7 +20,8 @@ public class MainPresenterImpl implements MainPresenter {
     private MainInteractor mainInteractor;
     private Context context;
 
-    public MainPresenterImpl(Context context, EventBus eventBus, MainView mainView, MainInteractor mainInteractor) {
+    public MainPresenterImpl(
+            Context context, EventBus eventBus, MainView mainView, MainInteractor mainInteractor) {
         this.context = context;
         this.eventBus = eventBus;
         this.mainView = mainView;
