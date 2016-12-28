@@ -15,7 +15,7 @@ import com.grability.elio.grabilitytest.entities.App;
 import com.grability.elio.grabilitytest.entities.Category;
 import com.grability.elio.grabilitytest.main.MainPresenter;
 import com.grability.elio.grabilitytest.main.adapters.AppsRecyclerAdapter;
-import com.grability.elio.grabilitytest.main.di.AppsComponent;
+import com.grability.elio.grabilitytest.main.DI.AppsComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

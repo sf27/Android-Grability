@@ -6,9 +6,9 @@ import android.support.v4.app.Fragment;
 
 import com.grability.elio.grabilitytest.lib.di.LibsModule;
 import com.grability.elio.grabilitytest.main.UI.MainView;
-import com.grability.elio.grabilitytest.main.di.AppsComponent;
-import com.grability.elio.grabilitytest.main.di.AppsModule;
-import com.grability.elio.grabilitytest.main.di.DaggerAppsComponent;
+import com.grability.elio.grabilitytest.main.DI.AppsComponent;
+import com.grability.elio.grabilitytest.main.DI.AppsModule;
+import com.grability.elio.grabilitytest.main.DI.DaggerAppsComponent;
 
 /**
  * Created by elio on 12/27/16.
