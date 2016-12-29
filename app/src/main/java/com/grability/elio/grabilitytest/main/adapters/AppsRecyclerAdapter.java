@@ -5,6 +5,7 @@ package com.grability.elio.grabilitytest.main.adapters;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,12 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
+import com.grability.elio.grabilitytest.main.UI.AppDetailsActivity;
 
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
@@ -40,6 +43,11 @@ public class AppsRecyclerAdapter extends
     public void onBindViewHolder(AppsViewHolder holder, int position) {
         App obj = this.getData().get(position);
 
+        holder.imgView.setOnClickListener(v -> {
+            Intent myIntent = new Intent(context, AppDetailsActivity.class);
+            myIntent.putExtra("app_id", obj.getId());
+            context.startActivity(myIntent);
+        });
         holder.txtTitle.setText(formatTitle(obj.getTitle()));
         if (!obj.getImages().isEmpty()) {
             Glide.with(context)

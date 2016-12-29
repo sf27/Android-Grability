@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.grability.elio.grabilitytest.R;
+import com.grability.elio.grabilitytest.domain.FragmentUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setUpNavigation();
 
         Fragment fragment = new AppsFragment();
-        setFragmentContent(fragment);
+        FragmentUtils.setFragmentContent(MainActivity.this, fragment);
 
         // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
@@ -56,12 +57,12 @@ public class MainActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.drawer_action_apps:
                             fragment = new AppsFragment();
-                            setFragmentContent(fragment);
+                            FragmentUtils.setFragmentContent(MainActivity.this, fragment);
                             setTitle(getString(R.string.title_apps));
                             break;
                         case R.id.drawer_action_categories:
                             fragment = new CategoriesFragment();
-                            setFragmentContent(fragment);
+                            FragmentUtils.setFragmentContent(MainActivity.this, fragment);
                             setTitle(getString(R.string.title_categories));
                             break;
                         default:
@@ -82,12 +83,5 @@ public class MainActivity extends AppCompatActivity {
             default:
         }
         return true;
-    }
-
-    private void setFragmentContent(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frag_content, fragment);
-        fragmentTransaction.commit();
     }
 }

@@ -21,6 +21,10 @@ public class App extends RealmObject {
         this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public RealmList<AppImage> getImages() {
         return images;
     }
