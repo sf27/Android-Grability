@@ -13,50 +13,48 @@
     tools:context="com.grability.elio.grabilitytest.main.UI.AppDetailsActivity"
     tools:showIn="@layout/activity_app_details">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
+        android:id="@+id/ScrollView01"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:text="TextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtName"
-            android:textStyle="normal|bold"
-            android:textAlignment="center"
-            android:textSize="24sp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="226dp"
-            app:srcCompat="@drawable/logo"
-            android:id="@+id/imgLogo" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtCategory"
-            android:textStyle="normal|bold"
-            android:textAlignment="center" />
-
-        <ScrollView
-            android:id="@+id/ScrollView01"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:text="TextView"
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDescription"
-                android:textStyle="normal|bold"
+                android:text="TextView"
                 android:textAlignment="center"
-                android:minLines="5" />
+                android:textSize="24sp"
+                android:textStyle="normal|bold" />
 
-        </ScrollView>
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="match_parent"
+                android:layout_height="226dp"
+                app:srcCompat="@drawable/logo" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textStyle="normal|bold" />
 
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="5"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textStyle="normal|bold" />
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
