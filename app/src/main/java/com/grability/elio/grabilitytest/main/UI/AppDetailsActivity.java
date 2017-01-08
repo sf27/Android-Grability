@@ -69,7 +69,6 @@ public class AppDetailsActivity extends AppCompatActivity implements AppDetailsV
 
     @Override
     public void loadAppById(App app) {
-        System.out.println("loadAppById: " + app.getTitle());
         setTitle(app.getTitle());
         txtName.setText(app.getTitle());
         txtDescription.setText(app.getDescription());
