@@ -25,4 +25,9 @@ public class MainInteractorImpl implements MainInteractor {
             localRepository.loadApps();
         }
     }
+
+    @Override
+    public void getAppById(String id) {
+        localRepository.getAppById(id);
+    }
 }

@@ -11,8 +11,12 @@ import io.realm.RealmResults;
  */
 public interface LocalRepository {
     void loadApps();
+
+    void getAppById(String id);
+
     void saveApp(ApiClient.Entry entry);
 
     RealmResults<Category> getCategories();
+
     RealmResults<App> getApps();
 }

@@ -7,8 +7,6 @@ import com.grability.elio.grabilitytest.entities.Category;
 import com.grability.elio.grabilitytest.lib.base.EventBus;
 import com.grability.elio.grabilitytest.main.events.MainEvent;
 
-import java.util.ArrayList;
-
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmQuery;
@@ -32,7 +30,7 @@ public class LocalRepositoryImpl implements LocalRepository {
         RealmQuery<App> apps = realm.where(App.class);
         RealmQuery<Category> categories = realm.where(Category.class);
         MainEvent event = new MainEvent();
-        event.setType(MainEvent.onLoadAppsLocalSuccess);
+        event.setType(MainEvent.onLoadDataLocalSuccess);
         event.setError(null);
         event.setApps(apps.findAll());
         event.setCategories(categories.findAll());
@@ -71,5 +69,16 @@ public class LocalRepositoryImpl implements LocalRepository {
     public RealmResults<App> getApps() {
         RealmQuery<App> apps = realm.where(App.class);
         return apps.findAll();
+    }
+
+    public void getAppById(String id) {
+        App app = realm.where(App.class)
+                .equalTo("id", id)
+                .findFirst();
+        MainEvent event = new MainEvent();
+        event.setType(MainEvent.onLoadDetailsApp);
+        event.setError(null);
+        event.setApp(app);
+        eventBus.post(event);
     }
 }

@@ -1,10 +1,13 @@
 package com.grability.elio.grabilitytest;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.grability.elio.grabilitytest.lib.di.LibsModule;
+import com.grability.elio.grabilitytest.main.DI.AppDetailsModule;
+import com.grability.elio.grabilitytest.main.UI.AppDetailsView;
 import com.grability.elio.grabilitytest.main.UI.MainView;
 import com.grability.elio.grabilitytest.main.DI.AppsComponent;
 import com.grability.elio.grabilitytest.main.DI.AppsModule;
@@ -20,6 +23,16 @@ public class GrabilityApp extends Application {
                 .builder()
                 .libsModule(new LibsModule())
                 .appsModule(new AppsModule(context, fragment, mainView))
+                .appDetailsModule(new AppDetailsModule(context, fragment.getActivity(), null))
+                .build();
+    }
+
+    public AppsComponent getAppDetailsComponent(Context context, Activity activity, AppDetailsView detailsView) {
+        return DaggerAppsComponent
+                .builder()
+                .libsModule(new LibsModule())
+                .appsModule(new AppsModule(context, null, null))
+                .appDetailsModule(new AppDetailsModule(context, activity, detailsView))
                 .build();
     }
 }

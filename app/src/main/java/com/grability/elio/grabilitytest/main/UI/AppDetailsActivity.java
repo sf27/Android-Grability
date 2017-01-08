@@ -9,15 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.grability.elio.grabilitytest.GrabilityApp;
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
+import com.grability.elio.grabilitytest.main.AppDetailsPresenter;
+import com.grability.elio.grabilitytest.main.DI.AppsComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 
-public class AppDetailsActivity extends AppCompatActivity {
+public class AppDetailsActivity extends AppCompatActivity implements AppDetailsView {
 
+    private AppDetailsPresenter presenter;
     @BindView(R.id.imgLogo)
     ImageView imgLogo;
     @BindView(R.id.toolbar)
@@ -37,13 +40,36 @@ public class AppDetailsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
+        setupInjection();
+
+        presenter.onCreate();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         String app_id = intent.getStringExtra("app_id");
-        Realm realm = Realm.getDefaultInstance();
-        App app = realm.where(App.class)
-                .equalTo("id", app_id)
-                .findFirst();
+        presenter.getAppById(app_id);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+        }
+        return true;
+    }
+
+
+    public void setupInjection() {
+        GrabilityApp app = new GrabilityApp();
+        AppsComponent component = app.getAppDetailsComponent(AppDetailsActivity.this, this, this);
+        presenter = component.getAppDetailsPresenter();
+    }
+
+    @Override
+    public void loadAppById(App app) {
+        System.out.println("loadAppById: " + app.getTitle());
         setTitle(app.getTitle());
         txtName.setText(app.getTitle());
         txtDescription.setText(app.getDescription());
@@ -56,13 +82,8 @@ public class AppDetailsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-        }
-        return true;
+    protected void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
     }
 }

@@ -33,7 +33,7 @@ public class NetworkRepositoryImpl implements MainRepository {
                         response.body().feed.entry;
                 saveData(entries);
 
-                event.setType(MainEvent.onLoadAppsNetworkSuccess);
+                event.setType(MainEvent.onLoadDataNetworkSuccess);
                 event.setError(null);
                 event.setApps(getApps());
                 event.setCategories(getCategories());

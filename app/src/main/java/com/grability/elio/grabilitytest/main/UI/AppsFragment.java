@@ -13,9 +13,9 @@ import com.grability.elio.grabilitytest.GrabilityApp;
 import com.grability.elio.grabilitytest.R;
 import com.grability.elio.grabilitytest.entities.App;
 import com.grability.elio.grabilitytest.entities.Category;
+import com.grability.elio.grabilitytest.main.DI.AppsComponent;
 import com.grability.elio.grabilitytest.main.MainPresenter;
 import com.grability.elio.grabilitytest.main.adapters.AppsRecyclerAdapter;
-import com.grability.elio.grabilitytest.main.DI.AppsComponent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +38,9 @@ public class AppsFragment extends Fragment implements MainView {
         ButterKnife.bind(this, view);
 
         setupInjection();
+
+        presenter.onCreate();
+        presenter.loadApps();
 
         appRecyclerView.setAdapter(adapter);
         appRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));

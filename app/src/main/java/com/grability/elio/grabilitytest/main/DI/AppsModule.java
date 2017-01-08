@@ -1,5 +1,6 @@
 package com.grability.elio.grabilitytest.main.DI;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
@@ -33,6 +34,7 @@ public class AppsModule {
     private Context context;
     private Fragment fragment;
     private MainView mainView;
+    private Activity activity;
 
     public AppsModule(Context context, Fragment fragment, MainView mainView) {
         this.context = context;
@@ -40,10 +42,21 @@ public class AppsModule {
         this.mainView = mainView;
     }
 
+    public AppsModule(Context context, Activity activity) {
+        this.context = context;
+        this.activity = activity;
+    }
+
     @Provides
     @Singleton
     Fragment providesFragment() {
         return this.fragment;
+    }
+
+    @Provides
+    @Singleton
+    Activity providesActivity() {
+        return this.activity;
     }
 
     @Provides

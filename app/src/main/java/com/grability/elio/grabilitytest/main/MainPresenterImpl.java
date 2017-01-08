@@ -47,8 +47,9 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     @Subscribe
     public void onEventMainThread(MainEvent event) {
+        System.out.println("onEventMainThread");
         switch (event.getType()) {
-            case MainEvent.onLoadAppsLocalSuccess:
+            case MainEvent.onLoadDataLocalSuccess:
                 onLoadAppsSuccess(event.getApps());
                 onLoadCategoriesSuccess(event.getCategories());
                 onLostNetworkConnectionError(
@@ -58,7 +59,7 @@ public class MainPresenterImpl implements MainPresenter {
             case MainEvent.onLoadAppsError:
                 onDownloadError(event.getError());
                 break;
-            case MainEvent.onLoadAppsNetworkSuccess:
+            case MainEvent.onLoadDataNetworkSuccess:
                 onLoadAppsSuccess(event.getApps());
                 onLoadCategoriesSuccess(event.getCategories());
                 break;
