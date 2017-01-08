@@ -1,6 +1,6 @@
 package com.grability.elio.grabilitytest.main.DI;
 
-import com.grability.elio.grabilitytest.lib.di.LibsModule;
+import com.grability.elio.grabilitytest.lib.DI.LibsModule;
 import com.grability.elio.grabilitytest.main.AppDetailsPresenter;
 import com.grability.elio.grabilitytest.main.MainPresenter;
 import com.grability.elio.grabilitytest.main.adapters.AppsRecyclerAdapter;

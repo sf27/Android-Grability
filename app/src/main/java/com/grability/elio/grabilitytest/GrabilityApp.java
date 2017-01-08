@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.grability.elio.grabilitytest.lib.di.LibsModule;
+import com.grability.elio.grabilitytest.lib.DI.LibsModule;
 import com.grability.elio.grabilitytest.main.DI.AppDetailsModule;
 import com.grability.elio.grabilitytest.main.UI.AppDetailsView;
 import com.grability.elio.grabilitytest.main.UI.MainView;
